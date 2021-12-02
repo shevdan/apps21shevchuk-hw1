@@ -2,9 +2,17 @@ package ua.edu.ucu.tempseries;
 
 import org.junit.Test;
 
+import java.util.InputMismatchException;
+
 import static org.junit.Assert.assertEquals;
 
 public class TemperatureSeriesAnalysisTest {
+
+    @Test(expected = InputMismatchException.class)
+    public void testArrWithWrongInput(){
+        double[] temperatureSeries = {-275.0, 20.0, 30.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+    }
 
     @Test
     public void testAverageWithOneElementArray() {
@@ -178,11 +186,34 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(9.0, stat.getMaxTemp(), 0.00001);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testTempSummaryStatisticsWithEmptyArray() {
+        double[] temperatureSeries = {};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+
+        seriesAnalysis.summaryStatistics();
+    }
+
     @Test
     public void testAddTemps(){
+        double[] arr = { 3, 4, 5, 6, 7, 8, 9};
+        TemperatureSeriesAnalysis tmp = new TemperatureSeriesAnalysis(arr);
+        tmp.addTemps(10, 11, 12, 13, 14, 15, 16);
+        assertEquals(14, tmp.getArrLength());
+    }
+
+    @Test
+    public void testAddTempsWithEmptyArr(){
         TemperatureSeriesAnalysis tmp = new TemperatureSeriesAnalysis();
         tmp.addTemps(1, 2, 3, 4, 5);
         assertEquals(5, tmp.getArrLength());
+    }
+
+    @Test(expected = InputMismatchException.class)
+    public void testAddWithWrongValues() {
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
+
+        seriesAnalysis.addTemps(-275.0, 20.0);
     }
 
     @Test
