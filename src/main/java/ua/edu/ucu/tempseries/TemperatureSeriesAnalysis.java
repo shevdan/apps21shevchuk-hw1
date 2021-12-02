@@ -179,7 +179,7 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
         for (double val: temps) {
-            if (val < minTemp) {
+            if (val < -273.0) {
                 throw new InputMismatchException();
             }
             insert(val);
