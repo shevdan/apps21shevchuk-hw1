@@ -73,7 +73,7 @@ public class TemperatureSeriesAnalysis {
         }
         double mean = average(), variance = 0.0;
         for (int i = 0; i < arrLength; i++) {
-            variance += (tempArray[i] - mean) * (tempArray[i] - mean);
+            variance += Math.pow(tempArray[i] - mean, 2);
         }
         return Math.sqrt(variance / arrLength);
     }
@@ -180,6 +180,9 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
         for (double val: temps) {
+            if (val < minTemp) {
+                throw new InputMismatchException();
+            }
             insert(val);
         }
         return 0;
