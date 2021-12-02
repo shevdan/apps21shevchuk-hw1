@@ -15,17 +15,13 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
+        this.tempArray = new double[0];
         for (int i = 0; i < temperatureSeries.length; i++) {
             if (temperatureSeries[i] < -273.0) {
                 throw new InputMismatchException();
             }
+            insert(temperatureSeries[i]);
         }
-        this.tempArray = temperatureSeries;
-        this.arrLength = temperatureSeries.length;
-    }
-
-    public double[] getTempArray() {
-        return tempArray;
     }
 
     public void increaseArr() {
@@ -138,8 +134,8 @@ public class TemperatureSeriesAnalysis {
     public double[] findSubArray(double tempValue, boolean isLess) {
         int n = 0;
         for (int i = 0; i < arrLength; i++) {
-            if ((tempArray[i] < tempValue && isLess) ||
-                    (tempArray[i] > tempValue && !isLess)) {
+            if ((tempArray[i] < tempValue && isLess)
+                   || (tempArray[i] > tempValue && !isLess)) {
                 n += 1;
             }
         }
