@@ -1,7 +1,6 @@
 package ua.edu.ucu.tempseries;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class TempSummaryStatistics {
@@ -10,7 +9,7 @@ public class TempSummaryStatistics {
     private double minTemp;
     private double maxTemp;
 
-    public TempSummaryStatistics(double avg, double dev, double min, double max){
+    public TempSummaryStatistics(double avg,double dev,double min,double max) {
         this.avgTemp = avg;
         this.devTemp = dev;
         this.minTemp = min;
