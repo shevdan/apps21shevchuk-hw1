@@ -13,6 +13,13 @@ public class TemperatureSeriesAnalysisTest {
         double[] temperatureSeries = {-275.0, 20.0, 30.0};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
     }
+    
+    @Test
+    public void testToString(){
+        double[] arr = { 3, 4};
+        TemperatureSeriesAnalysis tmp = new TemperatureSeriesAnalysis(arr);
+        assertEquals("3.0 4.0 ", tmp.toString());
+    }
 
     @Test
     public void testAverageWithOneElementArray() {
