@@ -185,4 +185,11 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(5, tmp.getArrLength());
     }
 
+    @Test
+    public void testGetArrLength(){
+        double[] arr = { 3, 4, 5, 6, 7, 8, 9};
+        TemperatureSeriesAnalysis tmp = new TemperatureSeriesAnalysis(arr);
+        assertEquals(7, tmp.getArrLength());
+    }
+
 }
