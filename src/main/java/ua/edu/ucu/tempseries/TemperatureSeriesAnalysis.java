@@ -8,7 +8,7 @@ public class TemperatureSeriesAnalysis {
 
     private double[] tempArray;
     private int arrLength = 0;
-    private final static double minTemp = -273.0;
+    private static double minTemp = -273.0;
 
     public TemperatureSeriesAnalysis() {
         this.tempArray = new double[0];
