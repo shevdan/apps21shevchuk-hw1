@@ -1,9 +1,8 @@
 package ua.edu.ucu.tempseries;
 
-import static org.junit.Assert.*;
-
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TemperatureSeriesAnalysisTest {
 
@@ -183,7 +182,7 @@ public class TemperatureSeriesAnalysisTest {
     public void testAddTemps(){
         TemperatureSeriesAnalysis tmp = new TemperatureSeriesAnalysis();
         tmp.addTemps(1, 2, 3, 4, 5);
-        assertEquals(5, tmp.arrLength);
+        assertEquals(5, tmp.getArrLength());
     }
 
 }
