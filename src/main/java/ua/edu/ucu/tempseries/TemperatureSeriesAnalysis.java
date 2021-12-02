@@ -8,7 +8,6 @@ public class TemperatureSeriesAnalysis {
 
     private double[] tempArray;
     private int arrLength = 0;
-    private static double minTemp = -273.0;
 
     public TemperatureSeriesAnalysis() {
         this.tempArray = new double[0];
@@ -17,7 +16,7 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         this.tempArray = new double[0];
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < minTemp) {
+            if (temperatureSeries[i] < -273.0) {
                 throw new InputMismatchException();
             }
             insert(temperatureSeries[i]);
