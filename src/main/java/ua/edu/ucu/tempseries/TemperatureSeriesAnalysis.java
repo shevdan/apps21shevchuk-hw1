@@ -16,16 +16,15 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         this.tempArray = new double[0];
-        double minPossible = -273.0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < minPossible) {
+            if (temperatureSeries[i] < -273.0) {
                 throw new InputMismatchException();
             }
             insert(temperatureSeries[i]);
         }
     }
 
-    public int getArrLength(){
+    public int getArrLength() {
         return arrLength;
     }
 
