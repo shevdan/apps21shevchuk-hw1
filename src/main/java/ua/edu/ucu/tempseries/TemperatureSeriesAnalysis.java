@@ -3,12 +3,12 @@ package ua.edu.ucu.tempseries;
 import java.util.InputMismatchException;
 import java.util.Objects;
 
-import static java.lang.Math.*;
 
 public class TemperatureSeriesAnalysis {
 
     private double[] tempArray;
     private int arrLength = 0;
+    private final double minTemp = -273.0;
 
     public TemperatureSeriesAnalysis() {
         this.tempArray = new double[0];
@@ -17,7 +17,7 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         this.tempArray = new double[0];
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < -273.0) {
+            if (temperatureSeries[i] < minTemp) {
                 throw new InputMismatchException();
             }
             insert(temperatureSeries[i]);
@@ -73,9 +73,9 @@ public class TemperatureSeriesAnalysis {
         }
         double mean = average(), variance = 0.0;
         for (int i = 0; i < arrLength; i++) {
-            variance += pow(tempArray[i] - mean, 2);
+            variance += Math.pow(tempArray[i] - mean, 2);
         }
-        return sqrt(variance / arrLength);
+        return Math.sqrt(variance / arrLength);
     }
 
     private double extremeVal(boolean isMin) {
@@ -127,11 +127,11 @@ public class TemperatureSeriesAnalysis {
         double closestVal = Double.POSITIVE_INFINITY;
         double dist = Double.POSITIVE_INFINITY;
         for (int i = 0; i < arrLength; i++) {
-            if (abs(tempArray[i] - tempValue) < dist) {
-                dist = abs(tempArray[i] - tempValue);
+            if (Math.abs(tempArray[i] - tempValue) < dist) {
+                dist = Math.abs(tempArray[i] - tempValue);
                 closestVal = tempArray[i];
             }
-            else if (Objects.equals(abs(tempArray[i] - tempValue), dist)) {
+            else if (Objects.equals(Math.abs(tempArray[i] - tempValue), dist)) {
                 closestVal = Double.max(tempArray[i], closestVal);
             }
 
@@ -151,8 +151,7 @@ public class TemperatureSeriesAnalysis {
         double[] subArr = new double[n];
         int idx = 0;
         for (int i = 0; i < arrLength; i++) {
-            if ((tempArray[i] < tempValue && isLess) 
-                || (tempArray[i] > tempValue && !isLess)) {
+            if ((tempArray[i] < tempValue && isLess) || (tempArray[i] > tempValue && !isLess)) {
                 subArr[idx] = tempArray[i];
                 idx += 1;
             }
