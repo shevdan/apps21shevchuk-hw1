@@ -7,8 +7,8 @@ import static java.lang.Math.*;
 
 public class TemperatureSeriesAnalysis {
 
-    double[] tempArray;
-    int arrLength = 0;
+    private double[] tempArray;
+    private int arrLength = 0;
 
     public TemperatureSeriesAnalysis() {
         this.tempArray = new double[0];
@@ -16,17 +16,22 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         this.tempArray = new double[0];
+        double minPossible = -273.0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < -273.0) {
+            if (temperatureSeries[i] < minPossible) {
                 throw new InputMismatchException();
             }
             insert(temperatureSeries[i]);
         }
     }
 
+    public int getArrLength(){
+        return arrLength;
+    }
+
     public void increaseArr() {
         double[] arrCopy = new double[2*(arrLength + 1)];
-        for (int i = 0; i < arrLength; i++){
+        for (int i = 0; i < arrLength; i++) {
             arrCopy[i] = tempArray[i];
         }
         this.tempArray = arrCopy;
@@ -77,17 +82,21 @@ public class TemperatureSeriesAnalysis {
     private double extremeVal(boolean isMin) {
 
 
-        Double xtrmVal;
-        if (isMin)
+        double xtrmVal;
+        if (isMin) {
             xtrmVal = Double.POSITIVE_INFINITY;
+        }
 
-        else
+        else {
             xtrmVal = Double.NEGATIVE_INFINITY;
+        }
 
 
         for (int i = 0; i < arrLength; i++) {
-            if ((tempArray[i] < xtrmVal && isMin) || (tempArray[i] > xtrmVal && !isMin))
+            if ((tempArray[i] < xtrmVal && isMin)
+                    || (tempArray[i] > xtrmVal && !isMin)) {
                 xtrmVal = tempArray[i];
+            }
         }
 
         return xtrmVal;
@@ -123,8 +132,9 @@ public class TemperatureSeriesAnalysis {
                 dist = abs(tempArray[i] - tempValue);
                 closestVal = tempArray[i];
             }
-            else if (Objects.equals(abs(tempArray[i] - tempValue), dist))
+            else if (Objects.equals(abs(tempArray[i] - tempValue), dist)) {
                 closestVal = Double.max(tempArray[i], closestVal);
+            }
 
         }
 
@@ -142,7 +152,8 @@ public class TemperatureSeriesAnalysis {
         double[] subArr = new double[n];
         int idx = 0;
         for (int i = 0; i < arrLength; i++) {
-            if ((tempArray[i] < tempValue && isLess) || (tempArray[i] > tempValue && !isLess)) {
+            if ((tempArray[i] < tempValue && isLess) 
+                || (tempArray[i] > tempValue && !isLess)) {
                 subArr[idx] = tempArray[i];
                 idx += 1;
             }
