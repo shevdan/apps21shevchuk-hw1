@@ -15,8 +15,8 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        for (int i = 0; i < temperatureSeries.length; i++){
-            if (temperatureSeries[i] < -273.0){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (temperatureSeries[i] < -273.0) {
                 throw new InputMismatchException();
             }
         }
@@ -28,7 +28,7 @@ public class TemperatureSeriesAnalysis {
         return tempArray;
     }
 
-    public void increaseArr(){
+    public void increaseArr() {
         double[] arrCopy = new double[2*(arrLength + 1)];
         for (int i = 0; i < arrLength; i++){
             arrCopy[i] = tempArray[i];
@@ -36,7 +36,7 @@ public class TemperatureSeriesAnalysis {
         this.tempArray = arrCopy;
     }
 
-    void insert(double val){
+    void insert(double val) {
         if (Objects.equals(arrLength, tempArray.length)) {
             increaseArr();
         }
@@ -45,9 +45,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arrLength; i++){
+        for (int i = 0; i < arrLength; i++) {
             sb.append(tempArray[i]);
             sb.append(" ");
         }
@@ -61,7 +61,7 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException();
         }
         double avg = 0;
-        for (int i = 0; i < arrLength; i++){
+        for (int i = 0; i < arrLength; i++) {
             avg += tempArray[i];
         }
         return avg / arrLength;
@@ -72,13 +72,13 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException();
         }
         double mean = average(), variance = 0.0;
-        for (int i = 0; i < arrLength; i++){
+        for (int i = 0; i < arrLength; i++) {
             variance += pow(tempArray[i] - mean, 2);
         }
         return sqrt(variance / arrLength);
     }
 
-    private double extremeVal(boolean isMin){
+    private double extremeVal(boolean isMin) {
 
 
         Double xtrmVal;
@@ -89,7 +89,7 @@ public class TemperatureSeriesAnalysis {
             xtrmVal = Double.NEGATIVE_INFINITY;
 
 
-        for (int i = 0; i < arrLength; i++){
+        for (int i = 0; i < arrLength; i++) {
             if ((tempArray[i] < xtrmVal && isMin) || (tempArray[i] > xtrmVal && !isMin))
                 xtrmVal = tempArray[i];
         }
@@ -122,8 +122,8 @@ public class TemperatureSeriesAnalysis {
 
         double closestVal = Double.POSITIVE_INFINITY;
         double dist = Double.POSITIVE_INFINITY;
-        for (int i = 0; i < arrLength; i++){
-            if (abs(tempArray[i] - tempValue) < dist){
+        for (int i = 0; i < arrLength; i++) {
+            if (abs(tempArray[i] - tempValue) < dist) {
                 dist = abs(tempArray[i] - tempValue);
                 closestVal = tempArray[i];
             }
@@ -135,16 +135,17 @@ public class TemperatureSeriesAnalysis {
         return  closestVal;
     }
 
-    public double[] findSubArray(double tempValue, boolean isLess){
+    public double[] findSubArray(double tempValue, boolean isLess) {
         int n = 0;
-        for (int i = 0; i < arrLength; i++){
-            if ((tempArray[i] < tempValue && isLess) || (tempArray[i] > tempValue && !isLess)) {
+        for (int i = 0; i < arrLength; i++) {
+            if ((tempArray[i] < tempValue && isLess) ||
+                    (tempArray[i] > tempValue && !isLess)) {
                 n += 1;
             }
         }
         double[] subArr = new double[n];
         int idx = 0;
-        for (int i = 0; i < arrLength; i++){
+        for (int i = 0; i < arrLength; i++) {
             if ((tempArray[i] < tempValue && isLess) || (tempArray[i] > tempValue && !isLess)) {
                 subArr[idx] = tempArray[i];
                 idx += 1;
@@ -172,7 +173,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public int addTemps(double... temps) {
-        for (double val: temps){
+        for (double val: temps) {
             insert(val);
         }
         return 0;
