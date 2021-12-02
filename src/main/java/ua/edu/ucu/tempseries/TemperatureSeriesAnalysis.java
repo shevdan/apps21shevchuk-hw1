@@ -73,7 +73,7 @@ public class TemperatureSeriesAnalysis {
         }
         double mean = average(), variance = 0.0;
         for (int i = 0; i < arrLength; i++) {
-            variance += Math.pow(tempArray[i] - mean, 2);
+            variance += (tempArray[i] - mean) * (tempArray[i] - mean);
         }
         return Math.sqrt(variance / arrLength);
     }
@@ -151,7 +151,8 @@ public class TemperatureSeriesAnalysis {
         double[] subArr = new double[n];
         int idx = 0;
         for (int i = 0; i < arrLength; i++) {
-            if ((tempArray[i] < tempValue && isLess) || (tempArray[i] > tempValue && !isLess)) {
+            if ((tempArray[i] < tempValue && isLess) 
+                || (tempArray[i] > tempValue && !isLess)) {
                 subArr[idx] = tempArray[i];
                 idx += 1;
             }
