@@ -8,7 +8,7 @@ public class TemperatureSeriesAnalysis {
 
     private double[] tempArray;
     private int arrLength = 0;
-    private final double minTemp = -273.0;
+    private final static double minTemp = -273.0;
 
     public TemperatureSeriesAnalysis() {
         this.tempArray = new double[0];
@@ -73,7 +73,7 @@ public class TemperatureSeriesAnalysis {
         }
         double mean = average(), variance = 0.0;
         for (int i = 0; i < arrLength; i++) {
-            variance += Math.pow(tempArray[i] - mean, 2);
+            variance += (tempArray[i] - mean) * (tempArray[i] - mean);
         }
         return Math.sqrt(variance / arrLength);
     }
